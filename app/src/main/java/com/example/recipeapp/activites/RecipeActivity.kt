@@ -1,14 +1,13 @@
 package com.example.recipeapp.activites
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.recipeapp.R
+import com.example.recipeapp.adapters.IngredientsAdapter
 import com.example.recipeapp.api.RecipeApi
 import com.example.recipeapp.databinding.ActivityRecipeBinding
-import com.example.recipeapp.models.Json4Kotlin_Base
 import com.example.recipeapp.models.Recipes
 import com.example.recipeapp.utils.Constants
 import retrofit2.Call
@@ -48,6 +47,9 @@ class RecipeActivity : AppCompatActivity() {
                     Glide.with(this@RecipeActivity)
                         .load(recipe?.image)
                         .into(binding.imageRecipe)
+                    binding.rvRecipeInfoIngredients.layoutManager = LinearLayoutManager(this@RecipeActivity, LinearLayoutManager.VERTICAL, false)
+                    val ingredientsAdapterAdapter = IngredientsAdapter(this@RecipeActivity, recipe!!.extendedIngredients)
+                    binding.rvRecipeInfoIngredients.adapter = ingredientsAdapterAdapter
 
                 }
             }
