@@ -1,22 +1,359 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:scrollbars="none"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activites.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/sv_recipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
         />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_random_recipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        card_view:cardElevation="4dp"
+        card_view:cardCornerRadius="20dp"
+        android:clickable="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_margin="5dp"
+        >
+        <LinearLayout
+
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_random"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@color/white"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+
+            />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                tools:layout_height="100dp"
+                android:gravity="center"
+                android:layout_height="match_parent">
+                <TextView
+                    android:padding="2dp"
+                android:id="@+id/tv_random_recipe"
+                android:gravity="center"
+
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text="Random Recipe Title"
+
+                />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+
+                    >
+                    <TextView
+                        android:gravity="center"
+                        android:textSize="12sp"
+                        android:layout_weight="1.6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Time (Minutes)"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginStart="3dp"
+                        />
+
+                    <TextView
+                        android:gravity="center"
+                        android:textSize="12sp"
+
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_weight="1.2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Servings"
+                        />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+
+                    >
+                    <ImageView
+                        android:foregroundGravity="right"
+                        android:layout_margin="3dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1.5"
+                        android:layout_height="15dp"
+                        android:src="@drawable/ic_clock"
+                        />
+                    <TextView
+                        android:id="@+id/tv_random_time"
+                        android:textSize="12sp"
+                        android:layout_weight="1.5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="45"
+
+                        android:layout_margin="3dp"
+
+                        />
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_margin="3dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="15dp"
+                        android:src="@drawable/ic_waiter"
+                        />
+
+                    <TextView
+
+                        android:id="@+id/tv_random_servings"
+                        android:textSize="12sp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="400"
+
+                        />
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:textSize="16sp"
+        android:layout_height="wrap_content"
+        android:text="INDIAN"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:paddingStart="30dp"
         />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_indian"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="more"
+            android:textColor="#3480CC"
+            android:textStyle="bold"
+            android:gravity="end"
+            android:paddingEnd="20dp"
+            />
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_indian"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:layout_height="wrap_content"
+            android:text="ITALIAN"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:paddingStart="30dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_italian"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="more"
+            android:textColor="#3480CC"
+            android:textStyle="bold"
+            android:gravity="end"
+            android:paddingEnd="20dp"
+            />
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_italian"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:layout_height="wrap_content"
+            android:text="CHINESE"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:paddingStart="30dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_chinese"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="more"
+            android:textColor="#3480CC"
+            android:textStyle="bold"
+            android:gravity="end"
+            android:paddingEnd="20dp"
+            />
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_chinese"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:layout_height="wrap_content"
+            android:text="THAI"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:paddingStart="30dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_thai"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="more"
+            android:textColor="#3480CC"
+            android:textStyle="bold"
+            android:gravity="end"
+            android:paddingEnd="20dp"
+            />
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_thai"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:layout_height="wrap_content"
+            android:text="AMERICAN"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:paddingStart="30dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_american"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="more"
+            android:textColor="#3480CC"
+            android:textStyle="bold"
+            android:gravity="end"
+            android:paddingEnd="20dp"
+            />
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_american"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    </LinearLayout>
+
+</ScrollView>
