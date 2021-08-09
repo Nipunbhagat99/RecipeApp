@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.HorizontalScrollView
+import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.recipeapp.adapters.RecipeMainScreenAdapter
@@ -12,8 +12,6 @@ import com.example.recipeapp.api.RecipeApi
 import com.example.recipeapp.databinding.ActivityMainBinding
 import com.example.recipeapp.models.Json4Kotlin_Base
 import com.example.recipeapp.models.RecipeShortList
-import com.example.recipeapp.models.Recipes
-import com.example.recipeapp.models.Result
 import com.example.recipeapp.utils.Constants.Companion.API_KEY
 import com.example.recipeapp.utils.Constants.Companion.BASE_URL
 import retrofit2.Call
@@ -65,12 +63,37 @@ class MainActivity : AppCompatActivity() , RecipeMainScreenAdapter.RecipeInterfa
 
         )
 
+        binding.tvChinese.setOnClickListener {
+            val intent = Intent(this , RecipeListActivity::class.java)
+            intent.putExtra("cuisine" , "chinese")
+            intent.putExtra("query", "none")
+            startActivity(intent)
+        }
+
+
+        binding.svRecipe.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                val intent = Intent(this@MainActivity , RecipeListActivity::class.java)
+                intent.putExtra("cuisine" , "none")
+                intent.putExtra("query", "$query")
+                startActivity(intent)
+
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.i("lmao", "$newText")
+                return false
+            }
+
+        })
 
         setupIndianRV()
-//        setupItalianRV()
-//        setupChineseRV()
-//        setupThaiRV()
-//        setupAmericanRV()
+        setupItalianRV()
+        setupChineseRV()
+        setupThaiRV()
+        setupAmericanRV()
 
 
     }
@@ -106,6 +129,13 @@ class MainActivity : AppCompatActivity() , RecipeMainScreenAdapter.RecipeInterfa
         }
 
         )
+
+        binding.tvAmerican.setOnClickListener {
+            val intent = Intent(this , RecipeListActivity::class.java)
+            intent.putExtra("cuisine" , "american")
+            intent.putExtra("query", "none")
+            startActivity(intent)
+        }
     }
 
     private fun setupThaiRV() {
@@ -139,6 +169,13 @@ class MainActivity : AppCompatActivity() , RecipeMainScreenAdapter.RecipeInterfa
         }
 
         )
+
+        binding.tvThai.setOnClickListener {
+            val intent = Intent(this , RecipeListActivity::class.java)
+            intent.putExtra("cuisine" , "thai")
+            intent.putExtra("query", "none")
+            startActivity(intent)
+        }
     }
 
     private fun setupChineseRV() {
@@ -172,6 +209,8 @@ class MainActivity : AppCompatActivity() , RecipeMainScreenAdapter.RecipeInterfa
         }
 
         )
+
+
     }
 
     private fun setupItalianRV() {
@@ -205,6 +244,13 @@ class MainActivity : AppCompatActivity() , RecipeMainScreenAdapter.RecipeInterfa
         }
 
         )
+
+        binding.tvItalian.setOnClickListener {
+            val intent = Intent(this , RecipeListActivity::class.java)
+            intent.putExtra("cuisine" , "italian")
+            intent.putExtra("query", "none")
+            startActivity(intent)
+        }
     }
 
     private fun setupIndianRV(){
@@ -214,7 +260,7 @@ class MainActivity : AppCompatActivity() , RecipeMainScreenAdapter.RecipeInterfa
             .build()
 
         val service = retrofit.create(RecipeApi::class.java)
-        val call = service.getMainScreenRecipes("indian", API_KEY, 1)
+        val call = service.getMainScreenRecipes("indian", API_KEY, 10)
 
         call.enqueue(object : Callback<RecipeShortList>{
             override fun onResponse(
@@ -238,6 +284,15 @@ class MainActivity : AppCompatActivity() , RecipeMainScreenAdapter.RecipeInterfa
         }
 
         )
+
+        binding.tvIndian.setOnClickListener {
+            val intent = Intent(this , RecipeListActivity::class.java)
+            intent.putExtra("cuisine" , "indian")
+            intent.putExtra("query", "none")
+            startActivity(intent)
+        }
+
+
 
 
 

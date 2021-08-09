@@ -9,6 +9,7 @@
     tools:context=".activites.RecipeActivity">
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
+
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@drawable/img_rounded_background"
@@ -38,7 +39,7 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        card_view:cardCornerRadius="20dp"
+
                         >
 
                     <com.google.android.material.imageview.ShapeableImageView
@@ -46,7 +47,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="250dp"
                         android:backgroundTint="@color/white"
-                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize20Percent"
                         android:background="@drawable/img_rounded_background"
 
                         />
@@ -54,12 +54,14 @@
                     </androidx.cardview.widget.CardView>
                     </FrameLayout>
                     <ImageButton
+                        android:layout_margin="20dp"
+                        android:gravity="center"
                         android:id="@+id/ib_back_recipe"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:paddingRight="3dp"
                         android:src="@drawable/ic_back_arrow"
-                        android:padding="30dp"
-                        android:background="@null"
+                        android:background="@drawable/back_button_background"
                         />
                 </FrameLayout>
 
@@ -83,6 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <TextView
+                android:visibility="invisible"
                 android:id="@+id/tv_recipe_info_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -99,7 +102,7 @@
                 android:text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
 
 "
-
+                android:visibility="invisible"
                 android:textSize="16sp"
 
                 />

@@ -1,5 +1,6 @@
 package com.example.recipeapp.api
 
+import com.example.recipeapp.models.Cuisine
 import com.example.recipeapp.models.Json4Kotlin_Base
 import com.example.recipeapp.models.RecipeShortList
 import com.example.recipeapp.models.Recipes
@@ -19,4 +20,7 @@ interface RecipeApi {
 
     @GET("recipes/{id}/information?apiKey=$API_KEY")
     fun getRecipeInfo(@Path("id") id : Int):  Call<Recipes>
+
+    @GET("recipes/complexSearch?")
+    fun getCuisineRecipes( @Query("cuisine") cuisine: String, @Query("apiKey") apiKey: String,@Query("number") number: Int,@Query("addRecipeInformation") addRecipeInformation : Boolean): Call<Cuisine>
 }

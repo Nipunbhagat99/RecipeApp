@@ -17,13 +17,18 @@
         android:orientation="vertical"
         >
 
-    <androidx.appcompat.widget.SearchView
+    <SearchView
         android:id="@+id/sv_recipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:elevation="6dp"
+        card_view:queryHint="Search Recipes..."
+        card_view:queryBackground="@android:color/transparent"
+        card_view:iconifiedByDefault="false"
+        android:layout_margin="5dp"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="10dp"
+        android:background="@drawable/seachbar_background"
         />
 
     <androidx.cardview.widget.CardView

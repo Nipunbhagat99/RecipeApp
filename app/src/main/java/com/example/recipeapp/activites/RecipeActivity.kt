@@ -3,6 +3,7 @@ package com.example.recipeapp.activites
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.recipeapp.adapters.IngredientsAdapter
@@ -22,7 +23,13 @@ class RecipeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRecipeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.ibBackRecipe.setOnClickListener{
+            onBackPressed()
+        }
+
         val id = intent.getIntExtra("Id", 1234)
+
 
         val retrofit  = Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
@@ -43,10 +50,14 @@ class RecipeActivity : AppCompatActivity() {
                     Log.e("lmao", "${recipe?.title}")
                     binding.tvRecipeInfoName.text = recipe?.title
                     val text =  recipe?.summary
+                    binding.tvRecipeInfoName.visibility = View.VISIBLE
                     binding.tvRecipeInfoPara.text = text?.replace(Regex("<.*?>"), "")
-                    Glide.with(this@RecipeActivity)
-                        .load(recipe?.image)
-                        .into(binding.imageRecipe)
+                    binding.tvRecipeInfoPara.visibility = View.VISIBLE
+                    if(!this@RecipeActivity.isFinishing) {
+                        Glide.with(this@RecipeActivity)
+                            .load(recipe?.image)
+                            .into(binding.imageRecipe)
+                    }
                     binding.rvRecipeInfoIngredients.layoutManager = LinearLayoutManager(this@RecipeActivity, LinearLayoutManager.VERTICAL, false)
                     val ingredientsAdapterAdapter = IngredientsAdapter(this@RecipeActivity, recipe!!.extendedIngredients)
                     binding.rvRecipeInfoIngredients.adapter = ingredientsAdapterAdapter
