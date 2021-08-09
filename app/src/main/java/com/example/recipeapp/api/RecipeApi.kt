@@ -23,4 +23,7 @@ interface RecipeApi {
 
     @GET("recipes/complexSearch?")
     fun getCuisineRecipes( @Query("cuisine") cuisine: String, @Query("apiKey") apiKey: String,@Query("number") number: Int,@Query("addRecipeInformation") addRecipeInformation : Boolean): Call<Cuisine>
+
+    @GET("recipes/complexSearch?")
+    fun getQueryRecipes( @Query("query") query: String, @Query("apiKey") apiKey: String,@Query("number") number: Int,@Query("addRecipeInformation") addRecipeInformation : Boolean): Call<Cuisine>
 }
