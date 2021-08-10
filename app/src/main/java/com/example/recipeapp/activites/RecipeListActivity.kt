@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipeapp.adapters.CuisineRecipesAdapter
+import com.example.recipeapp.adapters.SavedRecipeAdapter
 import com.example.recipeapp.api.RecipeApi
+import com.example.recipeapp.database.DatabaseHandler
 import com.example.recipeapp.databinding.ActivityCuisineBinding
 import com.example.recipeapp.models.Cuisine
 import com.example.recipeapp.utils.Constants
@@ -18,7 +20,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RecipeListActivity : AppCompatActivity(), CuisineRecipesAdapter.RecipeInterface {
+class RecipeListActivity : AppCompatActivity(), CuisineRecipesAdapter.RecipeInterface, SavedRecipeAdapter.RecipeInterface {
     private lateinit var binding : ActivityCuisineBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +36,15 @@ class RecipeListActivity : AppCompatActivity(), CuisineRecipesAdapter.RecipeInte
         val query = intent.getStringExtra("query")
 
 
-
-        if(cuisine != "none") {
+        if(cuisine == "SAVED"){
+            getSavedRecipes()
+            binding.tvHeading.text = cuisine?.uppercase()
+        }
+        else if(cuisine != "none") {
             getCuisineRecipes(cuisine)
             binding.tvHeading.text = cuisine?.uppercase()
         }
-        if(query != "none") {
+        else if(query != "none") {
             getQueryRecipes(query!!)
             binding.tvHeading.text = "Search results for : $query"
             binding.tvHeading.typeface = Typeface.DEFAULT
@@ -125,5 +130,22 @@ class RecipeListActivity : AppCompatActivity(), CuisineRecipesAdapter.RecipeInte
         val intent = Intent(this, RecipeActivity::class.java)
         intent.putExtra("Id", id)
         startActivity(intent)
+    }
+
+    private fun getSavedRecipes(){
+        val dbHandler = DatabaseHandler(this)
+        val list = dbHandler.getRecipeList()
+        binding.rvCuisine.layoutManager = LinearLayoutManager(this@RecipeListActivity, LinearLayoutManager.VERTICAL,false)
+        val savedRecipeAdapter = SavedRecipeAdapter(this@RecipeListActivity, list ,this@RecipeListActivity)
+        binding.rvCuisine.adapter = savedRecipeAdapter
+
+    }
+
+
+
+
+    override fun onResume() {
+        super.onResume()
+        getSavedRecipes()
     }
 }

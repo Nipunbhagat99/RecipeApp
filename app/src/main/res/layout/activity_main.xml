@@ -27,10 +27,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="6dp"
-        card_view:queryHint="Search Recipes..."
-        card_view:queryBackground="@android:color/transparent"
-        card_view:iconifiedByDefault="false"
-
+        android:queryHint="Search Recipes..."
+        android:queryBackground="@android:color/transparent"
+        android:iconifiedByDefault="false"
         android:layout_margin="20dp"
         android:background="@drawable/seachbar_background"
         />
@@ -369,6 +368,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
+        android:id="@+id/fab_saved"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:layout_gravity="end|bottom"

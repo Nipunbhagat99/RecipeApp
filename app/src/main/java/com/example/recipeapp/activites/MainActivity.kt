@@ -12,6 +12,7 @@ import com.example.recipeapp.api.RecipeApi
 import com.example.recipeapp.databinding.ActivityMainBinding
 import com.example.recipeapp.models.Json4Kotlin_Base
 import com.example.recipeapp.models.RecipeShortList
+import com.example.recipeapp.models.Recipes
 import com.example.recipeapp.utils.Constants.Companion.API_KEY
 import com.example.recipeapp.utils.Constants.Companion.BASE_URL
 import retrofit2.Call
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() , RecipeMainScreenAdapter.RecipeInterfa
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        lateinit var recipe : Recipes
         val retrofit  = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() , RecipeMainScreenAdapter.RecipeInterfa
             ) {
                 if (response.code() == 200) {
                     val list = response.body()?.recipes
-                    val recipe = list?.get(0)
+                    recipe = list?.get(0)!!
                     Log.e("lmao", "${recipe?.title}")
                     binding.tvRandomRecipe.text = recipe?.title
                     Glide.with(this@MainActivity)
@@ -94,6 +95,19 @@ class MainActivity : AppCompatActivity() , RecipeMainScreenAdapter.RecipeInterfa
         setupChineseRV()
         setupThaiRV()
         setupAmericanRV()
+
+        binding.fabSaved.setOnClickListener {
+            val intent = Intent(this , RecipeListActivity::class.java)
+            intent.putExtra("cuisine" , "SAVED")
+            intent.putExtra("query", "none")
+            startActivity(intent)
+        }
+
+        binding.cvRandomRecipe.setOnClickListener {
+            val intent = Intent(this, RecipeActivity::class.java)
+            intent.putExtra("Id", recipe.id)
+            startActivity(intent)
+        }
 
 
     }

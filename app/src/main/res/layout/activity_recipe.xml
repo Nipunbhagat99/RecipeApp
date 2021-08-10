@@ -134,9 +134,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:baselineAlignBottom="false"
-            android:clickable="true"
+            android:clickable="false"
+            android:id="@+id/fab_save"
             android:outlineAmbientShadowColor="@color/white"
-            android:src="@drawable/ic_unsaved"
+
             app:fabSize="normal"
             app:layout_anchorGravity="end|bottom"
             android:layout_marginRight="50dp"
