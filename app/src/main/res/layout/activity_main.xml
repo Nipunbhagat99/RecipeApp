@@ -27,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="6dp"
+        android:inputType="text"
         android:queryHint="Search Recipes..."
         android:queryBackground="@android:color/transparent"
         android:iconifiedByDefault="false"

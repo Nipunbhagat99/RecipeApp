@@ -90,6 +90,11 @@ class MainActivity : AppCompatActivity() , RecipeMainScreenAdapter.RecipeInterfa
 
         })
 
+        binding.svRecipe.setOnCloseListener {
+            binding.svRecipe.clearFocus()
+            false
+        }
+
         setupIndianRV()
         setupItalianRV()
         setupChineseRV()

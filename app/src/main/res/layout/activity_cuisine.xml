@@ -30,12 +30,14 @@
                 android:text="INDIAN"
                 android:textColor="@color/black"
                 android:textSize="24sp"
+                android:autoSizeMinTextSize="12sp"
                 android:textStyle="bold"
                 />
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginLeft="30dp"
+            android:visibility="gone"
             android:layout_marginRight="30dp"
             android:layout_marginTop="20dp"
             android:id="@+id/rv_cuisine"
@@ -44,8 +46,20 @@
             android:orientation="vertical"
             />
 
+        <TextView
+
+            android:id="@+id/tv_no_recipes"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:text="No Recipes Saved"
+            android:textSize="18dp"
+            android:gravity="center"
+            />
+
+
 
 
     </LinearLayout>
+
 
 </ScrollView>

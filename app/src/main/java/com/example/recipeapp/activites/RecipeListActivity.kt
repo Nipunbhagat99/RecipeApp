@@ -5,6 +5,8 @@ import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipeapp.adapters.CuisineRecipesAdapter
 import com.example.recipeapp.adapters.SavedRecipeAdapter
@@ -33,7 +35,7 @@ class RecipeListActivity : AppCompatActivity(), CuisineRecipesAdapter.RecipeInte
 
 
         val cuisine = intent.getStringExtra("cuisine")
-        val query = intent.getStringExtra("query")
+        var query = intent.getStringExtra("query")
 
 
         if(cuisine == "SAVED"){
@@ -45,8 +47,13 @@ class RecipeListActivity : AppCompatActivity(), CuisineRecipesAdapter.RecipeInte
             binding.tvHeading.text = cuisine?.uppercase()
         }
         else if(query != "none") {
-            getQueryRecipes(query!!)
+            var answer = query?.replace(" ","+")
+            val re = Regex("[^A-Za-z0-9 ]")
+            answer = re.replace(answer!!, "") // works
+            answer.replace("\\s+".toRegex(), "+")
+            getQueryRecipes(answer!!)
             binding.tvHeading.text = "Search results for : $query"
+            binding.tvHeading.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18F)
             binding.tvHeading.typeface = Typeface.DEFAULT
         }
 
@@ -72,6 +79,8 @@ class RecipeListActivity : AppCompatActivity(), CuisineRecipesAdapter.RecipeInte
 
                     val list = response.body()?.results!!
                     Log.i("lmqo", "${list[0].title}")
+                    binding.tvNoRecipes.visibility = View.GONE
+                    binding.rvCuisine.visibility = View.VISIBLE
                     binding.rvCuisine.layoutManager = LinearLayoutManager(this@RecipeListActivity, LinearLayoutManager.VERTICAL,false)
                     val cuisineRecipesAdapter = CuisineRecipesAdapter(this@RecipeListActivity, list ,this@RecipeListActivity)
                     binding.rvCuisine.adapter = cuisineRecipesAdapter
@@ -107,7 +116,13 @@ class RecipeListActivity : AppCompatActivity(), CuisineRecipesAdapter.RecipeInte
 
 
                     val list = response.body()?.results!!
-                    Log.i("lmqo", "${list[0].title}")
+                    if(list.isEmpty()){
+                        binding.tvNoRecipes.text = "No recipes found"
+                    }
+                    else{
+                        binding.tvNoRecipes.visibility = View.GONE
+                        binding.rvCuisine.visibility = View.VISIBLE
+                    }
                     binding.rvCuisine.layoutManager = LinearLayoutManager(this@RecipeListActivity, LinearLayoutManager.VERTICAL,false)
                     val cuisineRecipesAdapter = CuisineRecipesAdapter(this@RecipeListActivity, list ,this@RecipeListActivity)
                     binding.rvCuisine.adapter = cuisineRecipesAdapter
@@ -135,6 +150,13 @@ class RecipeListActivity : AppCompatActivity(), CuisineRecipesAdapter.RecipeInte
     private fun getSavedRecipes(){
         val dbHandler = DatabaseHandler(this)
         val list = dbHandler.getRecipeList()
+        if(list.isEmpty()){
+            binding.tvNoRecipes.text = "No recipes saved"
+        }
+        else{
+            binding.tvNoRecipes.visibility = View.GONE
+            binding.rvCuisine.visibility = View.VISIBLE
+        }
         binding.rvCuisine.layoutManager = LinearLayoutManager(this@RecipeListActivity, LinearLayoutManager.VERTICAL,false)
         val savedRecipeAdapter = SavedRecipeAdapter(this@RecipeListActivity, list ,this@RecipeListActivity)
         binding.rvCuisine.adapter = savedRecipeAdapter
