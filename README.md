@@ -1,6 +1,6 @@
 # RecipeApp
 
-Find recipes using spoonacular API https://spoonacular.com/food-api
+Find recipes using spoonacular API https://spoonacular.com/food-api .
 Used RetroFIT for API calls and Glide for image loading
 
 Main Activity:
